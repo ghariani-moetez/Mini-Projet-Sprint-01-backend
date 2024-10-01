@@ -21,7 +21,7 @@ class EmployeesApplicationTests {
 	private EmployeeService employeeService;
 	@Test
 	public void testCreateEmployee() {
-		Employee empl = new Employee("Jandoubi hosni",1500.500,new Date());
+		Employee empl = new Employee("babbababab hosni",1500.500,new Date());
 		employeeRepository.save(empl);
 		}
 	

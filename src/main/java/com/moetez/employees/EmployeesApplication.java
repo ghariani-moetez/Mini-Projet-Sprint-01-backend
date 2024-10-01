@@ -2,12 +2,15 @@ package com.moetez.employees;
 
 import java.util.Date;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 
+import com.moetez.employees.entities.Departement;
 import com.moetez.employees.entities.Employee;
 import com.moetez.employees.service.EmployeeService;
 
@@ -25,9 +28,16 @@ public class EmployeesApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
-		repositoryRestConfiguration.exposeIdsFor(Employee.class);
+		repositoryRestConfiguration.exposeIdsFor(Employee.class,Departement.class);
 		
 	}
+
+	@Bean
+	public ModelMapper modelMapper()
+	{
+	return new ModelMapper();
+	}
+
 
 
 }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.moetez.employees.dto.EmployeeDTO;
 import com.moetez.employees.entities.Employee;
 import com.moetez.employees.service.EmployeeService;
 
@@ -20,20 +21,20 @@ public class EmployeeRESTController {
 	@Autowired
 	EmployeeService employeeService;
 	@RequestMapping(method=RequestMethod.GET)
-	public List<Employee> getAllEmployees(){
+	public List<EmployeeDTO> getAllEmployees(){
 		return employeeService.getAllEmployees();	
 		}
 	@RequestMapping(value="/{id}",method = RequestMethod.GET)
-	public Employee getEmployeeById(@PathVariable("id") Long id) {
+	public EmployeeDTO getEmployeeById(@PathVariable("id") Long id) {
 	return employeeService.getEmployee(id);
 	 }
 	@RequestMapping(method = RequestMethod.POST)
-	public Employee createEmployee(@RequestBody Employee employee) {
-	return employeeService.saveEmployee(employee);
+	public EmployeeDTO createEmployee(@RequestBody EmployeeDTO employeeDTO) {
+	return employeeService.saveEmployee(employeeDTO);
 	}
 	@RequestMapping(method = RequestMethod.PUT)
-	public Employee updateEmployee(@RequestBody Employee employee) {
-	return employeeService.updateEmployee(employee);
+	public EmployeeDTO updateEmployee(@RequestBody EmployeeDTO employeeDTO) {
+	return employeeService.updateEmployee(employeeDTO);
 	}
 	
 	@RequestMapping(value="/{id}",method = RequestMethod.DELETE)
@@ -44,5 +45,9 @@ public class EmployeeRESTController {
 	@RequestMapping(value="/emplsdep/{idDep}",method = RequestMethod.GET)
 	public List<Employee> getEmployeesByCatId(@PathVariable("idDep") Long idDep) {
 	return employeeService.findByDepartementIdDep(idDep);
+	}
+	@RequestMapping(value="/emplsByName/{nom}",method = RequestMethod.GET)
+	public List<Employee> findByNomEmployeeContains(@PathVariable("nom") String nom) {
+	return employeeService.findByNomEmployeeContains(nom);
 	}
 }
